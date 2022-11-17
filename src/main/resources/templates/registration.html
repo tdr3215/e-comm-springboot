@@ -1,0 +1,33 @@
+
+  <head th:replace="fragments/fragments :: head"></head>
+  <body>
+  <div th:replace="fragments/fragments :: navbar" ></div>
+ 
+  <main role="main">
+      <div class="container" >
+          <form class="form-signin" th:action="@{/signup}" th:object="${user}" method="post" th:unless="${success}">
+              <h2 class="form-signin-heading" style="text-align: center">Please Sign Up</h2>
+                  <div class="form-group">
+        			<input type="text" th:field="*{username}" class="form-control" id="name" placeholder="Username"> 
+        			<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"class="text-danger"></span>
+     				</div>
+            <div class="form-group">
+                <input type="password" th:field="*{password}" placeholder="Password" class="form-control"/> 
+                <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></label>
+            </div>
+              <div style="display: flex; justify-content: space-between">
+                  <button class="btn btn-lg btn-primary" name="submit" value="signup" type="submit" style="flex-grow: 0.95">Register</button>
+     
+              </div>
+          </form>
+     
+          <div th:if="${success}">
+            <h3><span class="text-success" th:text="${success}"></span></h3>
+            <form th:action="@{/signin}" method="get"><button class="btn btn-md btn-success">Signin Page</button></form>
+        </div> 
+      </div>
+  </main>
+ 
+  <div th:replace="fragments/fragments :: footer"></div>
+  </body>
+  </html>
